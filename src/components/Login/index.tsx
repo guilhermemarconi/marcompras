@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
-import { UserContext } from 'services/UserContext';
 import { login } from 'services/authentication';
 
 import * as S from './styles';
@@ -13,21 +12,9 @@ const errorMessages = {
 function Login() {
   const [buttonText, setButtonText] = useState('Entrar');
   const [buttonDisabled, setButtonDisabledState] = useState(false);
-  const { user, setUser } = useContext(UserContext);
   const form = useRef(null);
   const emailInput = useRef(null);
   const passwordInput = useRef(null);
-
-  useEffect(() => {
-    const localUserData = JSON.parse(
-      decodeURIComponent(localStorage.getItem('userData') || '{}')
-    );
-
-    if (localUserData.userId) {
-      setUser(localUserData);
-      return;
-    }
-  }, [user, setUser]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -37,20 +24,12 @@ function Login() {
 
     setButtonDisabledState(true);
     setButtonText('Entrando...');
-    login(email, password)
-      .then((userData) => {
-        localStorage.setItem(
-          'userData',
-          encodeURIComponent(JSON.stringify(userData))
-        );
-        setUser(userData);
-      })
-      .catch((error) => {
-        console.error(error);
-        setButtonDisabledState(false);
-        setButtonText('Entrar');
-        alert(errorMessages[error.code] || 'Houve um erro ao entrar.');
-      });
+    login(email, password).catch((error) => {
+      console.error(error);
+      setButtonDisabledState(false);
+      setButtonText('Entrar');
+      alert(errorMessages[error.code] || 'Houve um erro ao entrar.');
+    });
 
     return false;
   }

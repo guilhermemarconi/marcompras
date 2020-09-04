@@ -10,11 +10,10 @@ function Header() {
   const { setUser } = useContext(UserContext);
 
   function handleLogout() {
-    logout()
-      .then(() => {
-        localStorage.removeItem('userData');
-        setUser({});
-      });
+    logout().then(() => {
+      // localStorage.removeItem('userData');
+      setUser({});
+    });
   }
 
   return (
@@ -22,7 +21,7 @@ function Header() {
       <Logo />
       <S.LogoutButton onClick={() => handleLogout()}>Logout</S.LogoutButton>
     </S.Wrapper>
-  )
-};
+  );
+}
 
 export default Header;
