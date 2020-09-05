@@ -13,6 +13,7 @@ export const colors = {
   success: `#19965F`,
   error: `#D90D1A`,
   alert: `#EEDD22`,
+  gray: `#EEEEEE`,
   border: `#CCCCCC`,
   overlay: rgba('#000000', 0.75),
 };

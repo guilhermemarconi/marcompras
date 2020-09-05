@@ -1,10 +1,12 @@
 import React from 'react';
 import * as S from './styles';
 
-const ActionButton = () => (
-  <S.Wrapper>
-    <h1>ActionButton</h1>
-  </S.Wrapper>
-);
+interface ActionButton {
+  action?: string;
+}
+
+function ActionButton({ action }: ActionButton): JSX.Element {
+  return <S.Wrapper>{/*  */}</S.Wrapper>;
+}
 
 export default ActionButton;

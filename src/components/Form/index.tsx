@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 import { generateUniqueId } from 'services/utils';
-import { database } from 'services/firebase'
+import { database } from 'services/firebase';
 
 import * as S from './styles';
 
@@ -24,7 +24,7 @@ function Form(props: FormInterface) {
       id: itemId,
       name: nameRef.current.value,
       type: typeRef.current.value,
-      // creationDate: Date.now()
+      creationDate: Date.now(),
     });
   }
 
@@ -32,7 +32,14 @@ function Form(props: FormInterface) {
     <S.Wrapper onSubmit={saveData}>
       <S.Fieldset>
         <S.Label htmlFor="itemName">Nome</S.Label>
-        <S.Input type="text" id="itemName" defaultValue={name || ''} ref={nameRef} required aria-required />
+        <S.Input
+          type="text"
+          id="itemName"
+          defaultValue={name || ''}
+          ref={nameRef}
+          required
+          aria-required
+        />
       </S.Fieldset>
 
       <S.Fieldset>
