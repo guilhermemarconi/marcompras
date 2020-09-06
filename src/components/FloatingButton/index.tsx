@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { FormContext } from 'services/FormContext';
+
 import * as S from './styles';
 
-const FloatingButton = () => (
-  <S.Wrapper>
-    <h1>FloatingButton</h1>
-  </S.Wrapper>
-);
+function FloatingButton(): JSX.Element {
+  const { setFormVisibility } = useContext(FormContext);
+
+  return <S.Button onClick={() => setFormVisibility(true)} />;
+}
 
 export default FloatingButton;

@@ -8,7 +8,7 @@ import Login from 'components/Login';
 import GlobalStyles from 'style/global';
 import * as S from './styles';
 
-function App() {
+function App(): JSX.Element {
   const [loaded, setLoaded] = useState(false);
   const [user, setUser] = useState({
     userId: '',

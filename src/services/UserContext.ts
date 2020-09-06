@@ -2,8 +2,8 @@ import { createContext } from 'react';
 
 interface User {
   user: {
-    userId: String,
-    email: String,
+    userId: string;
+    email: string;
   };
   setUser: Function;
 }
@@ -13,7 +13,7 @@ const baseContextValue: User = {
     userId: '',
     email: '',
   },
-  setUser: () => {},
-}
+  setUser: () => null,
+};
 
 export const UserContext = createContext(baseContextValue);

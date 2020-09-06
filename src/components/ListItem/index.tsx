@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Hammer from 'react-hammerjs';
+import classnames from 'classnames';
+
+import { FormContext } from 'services/FormContext';
+import { deleteItem } from 'services/firebase';
 
 import ActionButton from 'components/ActionButton';
 
@@ -23,22 +27,44 @@ function ListItem({
 }: ListItemInterface): JSX.Element {
   const [swiped, setSwipe] = useState(null);
 
+  const { setEditingItem } = useContext(FormContext);
+
   function handleSwipe(event) {
     const direction = event.offsetDirection === 2 ? 'left' : 'right';
     setSwipe(swiped ? null : direction);
+    return false;
+  }
+
+  function handleEditButton(id) {
+    setEditingItem(id);
+    setSwipe(null);
+  }
+
+  function handleDeleteButton(id) {
+    if (window.confirm('Você tem certeza?')) {
+      deleteItem(id);
+      setSwipe(null);
+    }
   }
 
   return (
     <S.Wrapper id={id}>
       <S.ActionButtonsWrapper>
-        <ActionButton></ActionButton>
-        <ActionButton></ActionButton>
-        <ActionButton></ActionButton>
-        <ActionButton></ActionButton>
+        <ActionButton action="edit" id={id} handler={handleEditButton} />
+        <ActionButton action="delete" id={id} handler={handleDeleteButton} />
+        <S.ActionButtonsSpacer />
+        <ActionButton action="edit" id={id} handler={handleEditButton} />
+        <ActionButton action="delete" id={id} handler={handleDeleteButton} />
       </S.ActionButtonsWrapper>
 
       <Hammer onSwipe={handleSwipe} direction="DIRECTION_HORIZONTAL">
-        <S.Item type="button">
+        <S.Item
+          type="button"
+          className={classnames({
+            'swipe-left': swiped === 'left',
+            'swipe-right': swiped === 'right',
+          })}
+        >
           <S.CheckBox />
           <S.ItemName>{name}</S.ItemName>
         </S.Item>

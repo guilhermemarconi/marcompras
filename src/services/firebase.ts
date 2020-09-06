@@ -9,3 +9,26 @@ export const firebaseApp = firebase.initializeApp({
 });
 
 export const database = firebaseApp.database();
+
+interface EditItem {
+  id: string;
+  name: string;
+  type: string;
+  checked: boolean;
+  creationDate: number;
+  checkingDate?: number;
+}
+
+export function editItem(itemData: EditItem) {
+  return new Promise((resolve, reject) => {
+    database
+      .ref(`items/${itemData.id}`)
+      .set({ ...itemData }, (error) =>
+        error ? reject(error) : resolve({ ...itemData })
+      );
+  });
+}
+
+export function deleteItem(id: string): void {
+  database.ref(`items/${id}`).remove();
+}

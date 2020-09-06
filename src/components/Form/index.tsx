@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 
+import { FormContext } from 'services/FormContext';
 import { generateUniqueId } from 'services/utils';
 import { database } from 'services/firebase';
 
@@ -11,10 +12,12 @@ interface FormInterface {
   type?: string;
 }
 
-function Form(props: FormInterface) {
+function Form(props: FormInterface): JSX.Element {
   const { id, name, type } = props;
   const nameRef = useRef(null);
   const typeRef = useRef(null);
+
+  const { setFormVisibility, setEditingItem } = useContext(FormContext);
 
   function saveData(event) {
     event.preventDefault();
@@ -26,6 +29,9 @@ function Form(props: FormInterface) {
       type: typeRef.current.value,
       creationDate: Date.now(),
     });
+
+    setFormVisibility(false);
+    setEditingItem(null);
   }
 
   return (
