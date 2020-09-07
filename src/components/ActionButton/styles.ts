@@ -13,6 +13,7 @@ export const Wrapper = styled.button`
   border: 0;
   border-radius: 0;
   appearance: none;
+  cursor: pointer;
 
   &.edit {
     background-color: ${colors.secondary};

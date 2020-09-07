@@ -24,7 +24,8 @@ export const fonts = {
     xs: fluidType({ 320: 12, 1920: 16 }),
     sm: fluidType({ 320: 14, 1920: 18 }),
     md: fluidType({ 320: 16, 1920: 20 }),
-    lg: fluidType({ 320: 20, 1920: 42 }),
+    lg: fluidType({ 320: 18, 1920: 36 }),
+    xl: fluidType({ 320: 20, 1920: 42 }),
   },
   weight: {
     light: 300,
@@ -51,7 +52,7 @@ export const breakpoints = {
 };
 
 export const transitions = {
-  default: `all 0.3s ease`,
+  default: `all 0.15s ease`,
   easing: `ease`,
   speed: {
     slow: `0.6s`,

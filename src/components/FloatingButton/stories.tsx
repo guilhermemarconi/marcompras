@@ -1,9 +1,11 @@
+import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
+
 import FloatingButton from '.';
 
 export default {
   title: 'FloatingButton',
-  component: FloatingButton
+  component: FloatingButton,
 } as Meta;
 
-export const Default: Story = () => <FloatingButton />;
+export const Default: Story = () => <FloatingButton show />;

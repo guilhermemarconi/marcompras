@@ -19,11 +19,13 @@ function List(): JSX.Element {
   useEffect(() => {
     const itemsRef = database.ref('items');
     itemsRef.on('value', (snapshot) => {
-      if (snapshot.exists()) setItems(snapshot.val());
+      setItems(snapshot.exists() ? snapshot.val() : {});
     });
   }, []);
 
   if (!user.userId) return null;
+
+  const itemsArr = Object.keys(items);
 
   return (
     <FormContext.Provider
@@ -34,19 +36,17 @@ function List(): JSX.Element {
         setFormVisibility,
       }}
     >
-      <S.Wrapper>
-        <Header />
+      <Header />
 
-        {Object.keys(items).map((item) => (
-          <ListItem {...items[item]} key={item} />
-        ))}
+      {itemsArr.length ? (
+        itemsArr.map((item) => <ListItem key={item} {...items[item]} />)
+      ) : (
+        <S.EmptyList>Adicione um item</S.EmptyList>
+      )}
 
-        {editingItem || showForm ? (
-          <Form {...items[editingItem]} />
-        ) : (
-          <FloatingButton />
-        )}
-      </S.Wrapper>
+      <Form show={editingItem || showForm} {...items[editingItem]} />
+
+      <FloatingButton show={!editingItem && !showForm} />
     </FormContext.Provider>
   );
 }

@@ -3,10 +3,11 @@ import Hammer from 'react-hammerjs';
 import classnames from 'classnames';
 
 import { FormContext } from 'services/FormContext';
-import { deleteItem } from 'services/firebase';
+import { editItem, deleteItem } from 'services/firebase';
 
 import ActionButton from 'components/ActionButton';
 
+import { ReactComponent as CheckIcon } from './check.svg';
 import * as S from './styles';
 
 interface ListItemInterface {
@@ -21,17 +22,28 @@ interface ListItemInterface {
 function ListItem({
   id,
   name,
-  type = 'normal',
   checked = false,
+  type = 'normal',
   creationDate = Date.now(),
 }: ListItemInterface): JSX.Element {
   const [swiped, setSwipe] = useState(null);
 
   const { setEditingItem } = useContext(FormContext);
 
+  function handleCheckedState() {
+    editItem({
+      id,
+      name,
+      type,
+      creationDate,
+      checkingDate: checked ? null : Date.now(),
+      checked: !checked,
+    });
+  }
+
   function handleSwipe(event) {
     const direction = event.offsetDirection === 2 ? 'left' : 'right';
-    setSwipe(swiped ? null : direction);
+    setSwipe(swiped ? (swiped !== direction ? null : direction) : direction);
     return false;
   }
 
@@ -41,7 +53,7 @@ function ListItem({
   }
 
   function handleDeleteButton(id) {
-    if (window.confirm('Você tem certeza?')) {
+    if (window.confirm(`Tem certeza que deseja remover ${name}?`)) {
       deleteItem(id);
       setSwipe(null);
     }
@@ -59,13 +71,21 @@ function ListItem({
 
       <Hammer onSwipe={handleSwipe} direction="DIRECTION_HORIZONTAL">
         <S.Item
-          type="button"
+          onClick={() => handleCheckedState()}
           className={classnames({
             'swipe-left': swiped === 'left',
             'swipe-right': swiped === 'right',
+            checked: checked,
+            [type]: true,
           })}
         >
-          <S.CheckBox />
+          {/* {type === 'normal' ? null : null} */}
+          <S.CheckBoxInput
+            type="checkbox"
+            checked={checked}
+            onChange={() => null}
+          />
+          <S.CheckBox>{checked ? <CheckIcon /> : null}</S.CheckBox>
           <S.ItemName>{name}</S.ItemName>
         </S.Item>
       </Hammer>
