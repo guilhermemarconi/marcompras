@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import classnames from 'classnames';
 
 import { login } from 'services/authentication';
 
@@ -9,9 +10,11 @@ const errorMessages = {
   'auth/user-not-found': 'Usuário não encontrado.',
 };
 
-function Login() {
+function Login(): JSX.Element {
   const [buttonText, setButtonText] = useState('Entrar');
   const [buttonDisabled, setButtonDisabledState] = useState(false);
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
   const form = useRef(null);
   const emailInput = useRef(null);
   const passwordInput = useRef(null);
@@ -36,33 +39,42 @@ function Login() {
 
   return (
     <S.Form ref={form} onSubmit={handleSubmit}>
-      <h1>Login</h1>
-
-      <fieldset>
-        <label htmlFor="email">Email</label>
-        <input
+      <S.FieldSet>
+        <S.Input
           ref={emailInput}
           type="email"
           id="email"
+          value={emailValue}
           required
           aria-required
+          onChange={() => setEmailValue(emailInput.current.value)}
         />
-      </fieldset>
+        <S.Label className={classnames({ alt: emailValue })} htmlFor="email">
+          Email
+        </S.Label>
+      </S.FieldSet>
 
-      <fieldset>
-        <label htmlFor="password">Senha</label>
-        <input
+      <S.FieldSet>
+        <S.Input
           ref={passwordInput}
           type="password"
           id="password"
+          value={passwordValue}
           required
           aria-required
+          onChange={() => setPasswordValue(passwordInput.current.value)}
         />
-      </fieldset>
+        <S.Label
+          className={classnames({ alt: passwordValue })}
+          htmlFor="password"
+        >
+          Senha
+        </S.Label>
+      </S.FieldSet>
 
-      <button type="submit" disabled={buttonDisabled}>
+      <S.SubmitButton type="submit" disabled={buttonDisabled}>
         {buttonText}
-      </button>
+      </S.SubmitButton>
     </S.Form>
   );
 }
