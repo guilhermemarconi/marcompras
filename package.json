@@ -1,6 +1,6 @@
 {
   "name": "marcompras",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "dependencies": {
     "classnames": "^2.2.6",
     "firebase": "^7.19.1",
