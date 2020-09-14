@@ -4,7 +4,7 @@ interface Form {
   editingItem?: string;
   setEditingItem: (id: string) => void;
   showForm: boolean;
-  setFormVisibility: (statw: boolean) => void;
+  setFormVisibility: (state: boolean) => void;
 }
 
 const baseFormValue: Form = {
