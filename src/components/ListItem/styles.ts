@@ -40,6 +40,18 @@ export const Item = styled.button`
   align-items: center;
   cursor: pointer;
 
+  &.urgent {
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: ${pxToRem(5)};
+      height: 100%;
+      background: ${colors.error};
+    }
+  }
+
   &.checked {
     background: ${colors.gray};
   }
