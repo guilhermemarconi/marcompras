@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import Hammer from 'react-hammerjs';
 import classnames from 'classnames';
 
@@ -16,14 +16,26 @@ interface FormInterface {
 }
 
 function Form({ id, name, type, show }: FormInterface): JSX.Element {
+  const { setFormVisibility, setEditingItem } = useContext(FormContext);
+
   const [nameValue, setNameValue] = useState(name || '');
+  const [typeValue, setTypeValue] = useState(type || '');
   const [nameFocused, setNameFocus] = useState(true);
+  const formRef = useRef(null);
   const nameRef = useRef(null);
   const typeRef = useRef(null);
 
-  const { setFormVisibility, setEditingItem } = useContext(FormContext);
+  useEffect(() => {
+    setNameValue(name);
+  }, [name]);
+
+  useEffect(() => {
+    setTypeValue(type);
+  }, [type]);
 
   function hideForm() {
+    setNameValue('');
+    setTypeValue('');
     setFormVisibility(false);
     setEditingItem(null);
   }
@@ -50,14 +62,13 @@ function Form({ id, name, type, show }: FormInterface): JSX.Element {
         <S.MainForm
           className={classnames({ visible: show })}
           onSubmit={saveData}
+          ref={formRef}
         >
-          {/* <S.CloseButton onClick={() => hideForm()} /> */}
-
           <S.Fieldset>
             <S.Input
               type="text"
               id="itemName"
-              value={nameValue}
+              value={nameValue || ''}
               ref={nameRef}
               autoFocus
               required
@@ -75,10 +86,8 @@ function Form({ id, name, type, show }: FormInterface): JSX.Element {
           </S.Fieldset>
 
           <S.Fieldset>
-            <S.Select id="itemType" defaultValue={type || ''} ref={typeRef}>
-              <option value="normal" defaultChecked>
-                Normal
-              </option>
+            <S.Select id="itemType" value={typeValue} ref={typeRef}>
+              <option value="normal">Normal</option>
               <option value="urgent">Urgente</option>
             </S.Select>
             <S.Label className={classnames({ alt: true })} htmlFor="itemType">
