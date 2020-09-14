@@ -3,9 +3,9 @@ import 'firebase/auth';
 import 'firebase/database';
 
 export const firebaseApp = firebase.initializeApp({
-  apiKey: 'AIzaSyBICNDgWVahdu_dyP5_zHUDv7Sbkk5wIgY',
-  authDomain: 'marcompras-c258a.firebaseapp.com',
-  databaseURL: 'https://marcompras-c258a.firebaseio.com',
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DB_URL,
 });
 
 export const database = firebaseApp.database();
