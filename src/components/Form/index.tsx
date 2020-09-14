@@ -86,7 +86,12 @@ function Form({ id, name, type, show }: FormInterface): JSX.Element {
           </S.Fieldset>
 
           <S.Fieldset>
-            <S.Select id="itemType" value={typeValue} ref={typeRef}>
+            <S.Select
+              id="itemType"
+              value={typeValue}
+              ref={typeRef}
+              onChange={() => setTypeValue(typeRef.current.value)}
+            >
               <option value="normal">Normal</option>
               <option value="urgent">Urgente</option>
             </S.Select>
