@@ -6,12 +6,11 @@ import { logout } from 'services/authentication';
 
 import * as S from './styles';
 
-function Header() {
+function Header(): JSX.Element {
   const { setUser } = useContext(UserContext);
 
   function handleLogout() {
     logout().then(() => {
-      // localStorage.removeItem('userData');
       setUser({});
     });
   }
@@ -19,7 +18,7 @@ function Header() {
   return (
     <S.Wrapper>
       <Logo />
-      <S.LogoutButton onClick={() => handleLogout()}>Logout</S.LogoutButton>
+      <S.LogoutButton onClick={handleLogout}>Logout</S.LogoutButton>
     </S.Wrapper>
   );
 }

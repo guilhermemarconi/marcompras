@@ -5,7 +5,7 @@ interface User {
     userId: string;
     email: string;
   };
-  setUser: Dispatch<SetStateAction<{ userId: string; email: string }>>;
+  setUser: Dispatch<SetStateAction<{ userId?: string; email?: string }>>;
 }
 
 const baseContextValue: User = {
