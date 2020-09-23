@@ -1,11 +1,11 @@
-import { createContext } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 
 interface User {
   user: {
     userId: string;
     email: string;
   };
-  setUser: Function;
+  setUser: Dispatch<SetStateAction<{ userId: string; email: string }>>;
 }
 
 const baseContextValue: User = {
