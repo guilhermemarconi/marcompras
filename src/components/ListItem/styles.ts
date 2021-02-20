@@ -24,8 +24,7 @@ export const Item = styled.button`
   display: flex;
   width: 100%;
   min-height: ${pxToRem(60)};
-  padding-right: ${spaces.lg};
-  padding-left: ${spaces.lg};
+  padding: ${spaces.sm} ${spaces.md};
   color: ${colors.primary};
   font-family: ${fonts.family};
   text-align: left;
@@ -68,6 +67,7 @@ export const CheckBox = styled.span`
   display: inline-flex;
   width: ${pxToRem(20)};
   height: ${pxToRem(20)};
+  margin-top: ${pxToRem(1)};
   margin-right: ${spaces.sm};
   border: ${pxToRem(2)} solid ${rgba(colors.primary, 0.3)};
   border-radius: ${pxToRem(4)};
