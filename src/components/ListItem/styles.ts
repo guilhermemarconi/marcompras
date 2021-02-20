@@ -10,8 +10,10 @@ export const Wrapper = styled.div`
 `;
 
 export const ActionButtonsWrapper = styled.div`
+  position: absolute;
   display: flex;
-  height: ${pxToRem(60)};
+  width: 100%;
+  height: 100%;
 `;
 
 export const ActionButtonsSpacer = styled.div`
@@ -19,12 +21,9 @@ export const ActionButtonsSpacer = styled.div`
 `;
 
 export const Item = styled.button`
-  position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   width: 100%;
-  height: 100%;
+  min-height: ${pxToRem(60)};
   padding-right: ${spaces.lg};
   padding-left: ${spaces.lg};
   color: ${colors.primary};
@@ -84,6 +83,7 @@ export const CheckBox = styled.span`
 
 export const ItemName = styled.span`
   font-size: ${fonts.size.lg};
+  flex: 1;
 `;
 
 export const ItemDate = styled.span``;
