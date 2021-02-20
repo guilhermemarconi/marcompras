@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+import { pxToRem } from './functions';
 
-import { spaces, colors, fonts } from './variables';
+import { colors, fonts } from './variables';
 
 const GlobalStyles = createGlobalStyle`
   html, body, div, span, applet, object, iframe,
@@ -45,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
   body {
     display: flex;
     min-height: 100vh;
-    padding-bottom: ${spaces.xl};
+    padding-bottom: ${pxToRem(100)};
     font-family: ${fonts.family};
     flex-direction: column;
   }
