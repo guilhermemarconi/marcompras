@@ -24,6 +24,7 @@ export const Item = styled.button`
   display: flex;
   width: 100%;
   min-height: ${pxToRem(60)};
+  margin: 0;
   padding: ${spaces.sm} ${spaces.md};
   color: ${colors.primary};
   font-family: ${fonts.family};
